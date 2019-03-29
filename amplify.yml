@@ -4,18 +4,17 @@ frontend:
     preBuild:
       commands:
         - nvm install 10
-        - npm install --quiet --global expo-cli
+        - npm install --quiet --global expo-cli@^2.14.0
         - >
           if [ -f yarn.lock ]; then
             yarn
-          elif [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then 
+          elif [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
             npm ci
           else
             npm install
           fi
     build:
       commands:
-        - expo login --username "$EXPO_CLI_USERNAME" 
         - expo build:web
   artifacts:
     baseDirectory: web-build
